@@ -60,7 +60,7 @@ if (isset($_POST['login'])) {
                             <a class="nav-link" href="#">Login</a>
                         </li>
                         <li class="nav-item active mr-3">
-                            <a class="nav-link" href="register.php">Register</a>
+                            <a class="nav-link" href="hanif_register.php">Register</a>
                         </li>
                     </ul>
                 </div>

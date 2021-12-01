@@ -1,26 +1,29 @@
 <?php
-include 'koneksi.php';
+include_once 'koneksi.php';
 $database = new database();
 if (isset($_POST['register'])) {
-    $nama = $_POST['nama'];
-    $email = $_POST['email'];
-    $no_hp = $_POST['no_hp'];
-    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-
+    $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
+    $email = mysqli_real_escape_string($koneksi, $_POST['email']);
+    
+    $no_hp = mysqli_real_escape_string($koneksi, $_POST['no_hp']);
+    $password = mysqli_real_escape_string($koneksi, $_POST['password']);
+    $konfirmasi_password = mysqli_real_escape_string($koneksi, $_POST['konfirmasi_password']);
+    $query = "SELECT * FROM users";
+    $result = mysqli_query($koneksi, $query);
+    
+    $row = mysqli_num_rows($result);
+    $row++;
+    
     if ($_POST['konfirmasi_password'] == $_POST['password']) {
-        if ($database->register($nama,$email,$password,$no_hp)) {
-            header("Refresh:2; url=hanif_login.php");
-            echo '<div class="alert alert-warning" role="alert">';
-            echo 'Berhasil registrasi';
-            echo '</div>';
-        }
-    }
-    else {
-        header("Refresh:2");
-        echo '<div class="alert alert-danger" role="alert">';
-        echo 'Gagal registrasi';
-        echo '<br>';
-        echo 'Periksa kembali password anda';
+        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+        
+        
+        $query = "INSERT INTO users (id,nama, email,password,no_hp) 
+                VALUES('$row','$nama', '$email', '$password',$no_hp)";
+        mysqli_query($koneksi, $query);
+        header("Refresh:2; url=hanif_login.php");
+        echo '<div class="alert alert-warning" role="alert">';
+        echo 'Berhasil registrasi';
         echo '</div>';
     }
 }
@@ -47,10 +50,10 @@ if (isset($_POST['register'])) {
         <div class="collapse navbar-collapse mx-auto" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active mr-3">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="hanif_login.php">Login</a>
                 </li>
                 <li class="nav-item active mr-3">
-                    <a class="nav-link" href="register.php">Register</a>
+                    <a class="nav-link" href="hanif_register.php">Register</a>
                 </li>
             </ul>
         </div>
@@ -65,7 +68,7 @@ if (isset($_POST['register'])) {
             <div class="card-body">
                 <h5 class="card-title" align="center">Registrasi</h5>
                 <hr></hr>
-                <form method="post" action="hanif_login.php">
+                <form method="post" action="">
                     <div class="form-group ml-3">
                         <label>Nama</label>
                         <input type="text" class="form-control" name="nama" style="width:80%" placeholder="Masukkan Nama Lengkap">

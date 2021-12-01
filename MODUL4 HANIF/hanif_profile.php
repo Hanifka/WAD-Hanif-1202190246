@@ -4,6 +4,16 @@ $database = new database();
 session_start();
 if (! isset($_SESSION['is_login'])) {
     header('location:hanif_login.php');
+
+
+$cobanavbar = '#17a2b8';
+
+    // mengecek apakah cookie warna navbar di set
+if (isset($_COOKIE['cobanavbar'])) {
+    $cobanavbar= $_COOKIE['cobanavbar'];
+  }
+
+
 }
 
 
@@ -62,12 +72,12 @@ else{
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    
 </head>
 <body class="bg-white">
     <!-- Navbar Section -->
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info" style="background-color: <?= $cobanavbar ?>;">
         <a class="navbar-brand" href="hanif_index.php">EAD Travel</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -135,8 +145,8 @@ else{
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Warna Navbar</label>
                             <div class="col-sm-10">
-                                <select id="select-color" name="warna_nav">
-                                    <option value="">Coming Soon</option>
+                                <select id="select-color" name="cobanavbar">
+                                    <option value="#FF6347">Merah</option>
                                     
                                 </select>
                             </div>

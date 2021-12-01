@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Nov 28, 2021 at 12:16 PM
+-- Generation Time: Dec 01, 2021 at 03:24 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -41,7 +41,7 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`id`, `user_id`, `nama_tempat`, `lokasi`, `harga`, `tanggal`) VALUES
-(15, 0, 'Ocean Park', 'Tangerang Selatan', 90000, '2021-11-10');
+(18, 0, 'Pantai Seribu', 'Jakarta', 500000, '2021-12-16');
 
 -- --------------------------------------------------------
 
@@ -62,7 +62,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nama`, `email`, `password`, `no_hp`) VALUES
-(0, 'dakldhawkj', 'hanifka@student.telkomuniversity.ac.id', '$2y$10$felFl8DEB/tFnEH/k/CWH.ySW8Fefb70/cdQsZFx/UQkcfVPYQYs2', '120299787');
+(1, 'test 2', 'hanifka@student.telkomuniversity.ac.id', '$2y$10$NCTeW7p//zfDW2Ynp1Z.se2iSdEZwzN/lL3QQJ.MhrPSlZC3LX556', '12345'),
+(2, 'Hanif Kurniawan Atmanto', 'kurniawanhanif63@gmail.com', '$2y$10$cAIldrnedaKN9EDOIc5FmuRpF9ru5vi537CMtsH0gMzMkCZmBzHF.', '12345');
 
 --
 -- Indexes for dumped tables
@@ -74,32 +75,6 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `no_hp`) VALUES
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `bookings`
---
-ALTER TABLE `bookings`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `bookings`
---
-ALTER TABLE `bookings`
-  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

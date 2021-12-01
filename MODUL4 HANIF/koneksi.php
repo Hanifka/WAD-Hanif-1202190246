@@ -12,6 +12,10 @@ if (mysqli_connect_errno()){
 	echo "Koneksi database gagal : " . mysqli_connect_error();
 }
 
+if (isset($_POST["cobanavbar"])) {
+    setcookie('cobanavbar', $_POST["cobanavbar"], strtotime('+14 days'), '/');
+  }
+
 
 class database{
     var $host = "localhost";
@@ -25,10 +29,7 @@ class database{
         $this->connect = mysqli_connect($this->host, $this->user, $this->pass, $this->name, $this->por);
     }
 
-    function register($nama, $email, $password, $no_hp){
-        $insert = mysqli_query($this->connect,"INSERT INTO users VALUES ('','$nama','$email','$password','$no_hp')");
-        return $insert;
-    }
+    
 
     function login($email, $password, $remember){
         $query = mysqli_query($this->connect, "SELECT * FROM users WHERE email='$email'");
@@ -54,4 +55,6 @@ class database{
         $_SESSION['is_login'] = TRUE;
     }
 }
+
+
 ?>
